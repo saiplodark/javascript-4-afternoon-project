@@ -30,7 +30,17 @@
 */
 
 //Code Here
-
+class Employee {
+  constructor(first_name, last_name, email, age){
+  this.first_name = first_name;
+  this.last_name = last_name;
+  this.email = email;
+  this.age = age;
+}
+makeWidget() {
+  return `${this.first_name} ${this.last_name} Widget`
+}
+}
 
 ////////// PROBLEM 2 //////////
 
@@ -48,7 +58,21 @@
 */
 
 //Code Here
-
+class Manager extends Employee{
+  constructor(first_name, last_name, email, age){
+    super(first_name, last_name, email, age)
+    this.reports = [];
+}
+makeWidget(){
+  return super.makeWidget
+}
+hire(employee){
+this.reports.push(employee)
+}
+fire(index){
+  this.reports.splice(index,1)
+}
+}
 
 ////////// PROBLEM 3 //////////
 
@@ -72,7 +96,56 @@
 */
 
 //Code Here
+class ProgressiveManager extends Manager{
+  constructor(first_name, last_name, email, age, reports){
+    super(first_name, last_name, email, age, reports)
+    this.title = "Not a manager"
+    this.bonus = 0
+  }
+  hire(employee){
+    super.hire(employee)
 
+    let a = this.reports.length
+    return(
+    (a === 0)
+    ? this.title = "Not a manager"
+    : (a >=1 && a <= 3) 
+    ? this.title = "Barely Manager"
+    : (a >= 4 && a <= 10) 
+    ? this.title = "Mostly Manager"
+    : (a >= 11 && a <= 50) 
+    ? this.title = "Manager"
+    : (a>= 51 && a <= 100) 
+    ? this.title = "Manager Plus"
+    : this.title = "Bestest Manager" )
+  }
+    // hire(employee){
+    //   super.hire(employee);
+    //   let a = this.reports.length;
+    //   //console.log(this.reports.length)
+    //   if ( a >= 1 && a <= 3){
+    //     this.title = "Barely Manager";
+    //   }
+    //   else if (a >= 4 && a <= 10){
+    //     this.title = "Mostly Manager";
+    //   }
+    //   else if (a >= 11 && a <= 50){
+    //     this.title = "Manager";
+    //   }
+    //   else if (a >= 51 && a <= 100){
+    //     this.title = "Manager Plus";
+    //   }
+    //   else {
+    //     this.title = "Bestest Manager";
+    //   }
+    //   return this.title;
+    // }
+
+  fire(index){
+    super.fire(index)
+    this.bonus = this.bonus + 100
+  }
+ }
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
